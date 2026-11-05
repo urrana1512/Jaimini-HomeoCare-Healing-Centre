@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import CounterAnimation from "@/components/animations/CounterAnimation";
+import IntroAnimation from "@/components/animations/IntroAnimation";
 
 // Services Data
 const servicesList = [
@@ -60,14 +61,14 @@ const servicesList = [
     color: "bg-purple-900/10 text-purple-950 border-purple-950/20",
     href: "/services/tarot-reading",
     benefits: ["Clarity on life decisions", "Spiritual guidance", "Timeline insights"],
-    image: "/images/services/crystal_bracelets.png" // fallback
+    image: "/images/services/tarot_reading.png"
   },
   {
-    name: "Crystal Bracelets",
+    name: "Crystal Products",
     desc: "Custom gemstone therapy jewelry activated with Reiki parameters for daily energetic support.",
     icon: Sparkles,
     color: "bg-celestial-blue/10 text-celestial-blue border-celestial-blue/20",
-    href: "/services/crystal-bracelets",
+    href: "/services/crystal-products",
     benefits: ["Aura support", "High vibrational crystals", "Reiki activated"],
     image: "/images/services/crystal_bracelets.png"
   }
@@ -139,7 +140,7 @@ const faqsList = [
     a: "Lama Fera is a direct Buddhist healing energy system that utilizes specific mantras and symbols. While Reiki is soft, nurturing, and flows naturally where needed, Lama Fera is highly targeted, intense, and exceptionally effective for clearing severe negative patterns, astral blockages, and deep physical trauma."
   },
   {
-    q: "How do I choose the correct custom crystal bracelet?",
+    q: "How do I choose the correct custom crystal product?",
     a: "During a consultation, Dr. Rana assesses your energy fields and life circumstances. We then construct a customized gemstone profile (using crystals like Amethyst for calming, Citrine for abundance, etc.) and program it with Reiki symbols specifically tuned to your aura."
   },
   {
@@ -151,6 +152,29 @@ const faqsList = [
 export default function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showIntro, setShowIntro] = useState(true);
+
+  // Check if intro has already run this session
+  useEffect(() => {
+    const hasPlayed = sessionStorage.getItem("jaimini_intro_played");
+    if (hasPlayed) {
+      setShowIntro(false);
+    }
+  }, []);
+
+  // Listen for replay event (triggered by footer)
+  useEffect(() => {
+    const handleReplay = () => {
+      setShowIntro(true);
+    };
+    window.addEventListener("replay-jaimini-intro", handleReplay);
+    return () => window.removeEventListener("replay-jaimini-intro", handleReplay);
+  }, []);
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem("jaimini_intro_played", "true");
+    setShowIntro(false);
+  };
 
   // Auto advance testimonials
   useEffect(() => {
@@ -161,7 +185,14 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="space-y-20 pb-20">
+    <>
+      <AnimatePresence>
+        {showIntro && (
+          <IntroAnimation onComplete={handleIntroComplete} />
+        )}
+      </AnimatePresence>
+
+      <div className={`space-y-20 pb-20 transition-opacity duration-700 ${showIntro ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-tr from-cream-white via-cream-white to-sage-green/20 overflow-hidden pt-12">
         {/* Decorative background vectors */}
@@ -613,5 +644,6 @@ export default function HomePage() {
         </ScrollReveal>
       </section>
     </div>
+    </>
   );
 }

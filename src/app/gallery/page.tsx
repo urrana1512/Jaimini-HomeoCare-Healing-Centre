@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Maximize2, Search } from "lucide-react";
 import { FaInstagram, FaPlay, FaHeart, FaComment } from "react-icons/fa";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 const galleryCategories = ["All", "Homeopathy", "Energy Healing", "Clinic"];
 
@@ -159,7 +160,7 @@ const galleryItemsList = [
   },
   {
     id: 16,
-    title: "Activated Crystal Bracelets",
+    title: "Activated Crystal Products",
     category: "Energy Healing",
     image: "/images/gallery/homeopathy/WhatsApp Image 2026-05-13 at 12.25.48 PM (1).jpeg",
     desc: "Customized Citrine and Jade bead layouts ready for patient shipping."
@@ -201,22 +202,13 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 text-left relative">
-      <div className="text-center space-y-4 mb-12">
-        <ScrollReveal direction="down">
-          <span className="text-xs font-semibold tracking-widest text-forest-green uppercase block">Visual Showcase</span>
-        </ScrollReveal>
-        <ScrollReveal direction="up" delay={0.1}>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal">
-            Our Clinic & Healing Gallery
-          </h1>
-          <div className="gold-divider w-24 mx-auto mt-4" />
-          <p className="text-xs md:text-sm text-medium-gray max-w-xl mx-auto mt-4">
-            Take a visual tour of our Ahmedabad consultation rooms, our organic homeopathic dispensary, and the serene setups of our energy therapies.
-          </p>
-        </ScrollReveal>
-      </div>
+    <div className="pb-16 text-left relative">
+      <PageHeader 
+        title="Healing Gallery" 
+        subtitle="Take a visual tour of our consultation rooms, our organic homeopathic dispensary, and the serene setups of our energy therapies." 
+      />
 
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 relative">
       {/* FILTER TABS */}
       <ScrollReveal direction="up" delay={0.2} className="flex justify-center space-x-2.5 mb-12 flex-wrap gap-y-3">
         {galleryCategories.map((cat) => (
@@ -447,6 +439,7 @@ export default function GalleryPage() {
           </div>
         </ScrollReveal>
       </section>
+      </div>
     </div>
   );
 }

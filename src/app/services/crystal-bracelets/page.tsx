@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Sparkles, Check, ChevronDown, MessageSquare, Info, ShieldAlert } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 const gemsGlossary = [
   {
@@ -85,12 +86,12 @@ const pricingBracelets = [
 
 const crystalFaqs = [
   {
-    q: "How do I know which crystal bracelet is suitable for my energy?",
+    q: "How do I know which crystal product is suitable for my energy?",
     a: "Dr. Rana will assess your current physical symptoms and aura during a consultation. Alternatively, you can describe your primary life goals or emotional blocks (e.g., career blocks, anxiety, thyroid issues) in your order form, and we will select the ideal gemstones."
   },
   {
-    q: "How often do these crystal bracelets require energetic recharging?",
-    a: "Crystals absorb heavy local fields over time. We recommend placing your bracelet on a Selenite plate or leaving it under full moon light once a month to reset its core charges."
+    q: "How often do these crystal products require energetic recharging?",
+    a: "Crystals absorb heavy local fields over time. We recommend placing your crystal product on a Selenite plate or leaving it under full moon light once a month to reset its core charges."
   },
   {
     q: "Are these authentic, natural gemstones?",
@@ -116,18 +117,28 @@ export default function CrystalsPage() {
   };
 
   return (
-    <div className="space-y-20 pb-20 pt-10 text-left">
+    <div className="pb-20 space-y-20 text-left">
+      <PageHeader 
+        title="Crystal Products" 
+        subtitle="Handcrafted gemstone shields and items activated with Usui Reiki parameters custom to your birth chart." 
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: "Crystal Products" },
+        ]}
+      />
+
       {/* HERO */}
-      <section className="relative bg-gradient-to-r from-cream-white via-cream-white to-blue-500/10 py-20 border-b border-light-gray/20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="down">
               <span className="text-xs font-semibold tracking-widest text-blue-950 uppercase block">Gemstone Medicine</span>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.1}>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
-                Programmed Crystal Bracelets & Healing Stones
-              </h1>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
+                Programmed Crystal Products & Healing Stones
+              </h2>
               <div className="gold-divider w-24 my-4" />
               <p className="text-xs md:text-sm text-medium-gray leading-relaxed max-w-xl">
                 Wear your therapeutic field. Handcrafted, high-vibrational gemstone bracelets cleansed, programmed, and attuned with Usui Reiki Master symbols programmed specifically to your birth matrix.
@@ -146,7 +157,7 @@ export default function CrystalsPage() {
             <ScrollReveal direction="left" delay={0.3} className="relative w-full max-w-[380px] aspect-[4/3] rounded-3xl overflow-hidden border border-light-gray shadow-premium-medium bg-off-white">
               <Image
                 src="/images/services/crystal_bracelets.png"
-                alt="Healing crystal bracelets beads"
+                alt="Healing crystal products beads"
                 fill
                 className="object-cover"
               />
@@ -360,7 +371,7 @@ export default function CrystalsPage() {
       {/* FAQS */}
       <section className="max-w-4xl mx-auto px-6 lg:px-8 space-y-12">
         <ScrollReveal direction="up" className="text-center space-y-4">
-          <h2 className="font-heading text-3xl font-bold text-deep-charcoal">Crystal Bracelets FAQs</h2>
+          <h2 className="font-heading text-3xl font-bold text-deep-charcoal">Crystal Products FAQs</h2>
           <div className="gold-divider w-20 mx-auto" />
         </ScrollReveal>
 

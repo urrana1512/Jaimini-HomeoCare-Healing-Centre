@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Heart, Sparkles, Award, Clock, ChevronDown, Check, Shield, MessageSquare, X, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 const chakraList = [
   { 
@@ -138,18 +139,28 @@ export default function ReikiPage() {
   const [selectedChakraIndex, setSelectedChakraIndex] = useState<number | null>(null);
 
   return (
-    <div className="space-y-20 pb-20 pt-10 text-left">
+    <div className="pb-20 space-y-20 text-left">
+      <PageHeader 
+        title="Reiki Healing" 
+        subtitle="Experience profound relaxation and systemic realignment through Usui Shiki Ryoho Reiki." 
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: "Reiki Healing" },
+        ]}
+      />
+
       {/* A. HERO */}
-      <section className="relative bg-gradient-to-r from-cream-white via-cream-white to-purple-500/10 py-20 border-b border-light-gray/20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="down">
               <span className="text-xs font-semibold tracking-widest text-purple-950 uppercase block">Energy Medicine</span>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.1}>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
-                Reiki Healing: Balance Energy, Restore Wellness
-              </h1>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
+                Balance Energy, Restore Wellness
+              </h2>
               <div className="gold-divider w-24 my-4" />
               <p className="text-xs md:text-sm text-medium-gray leading-relaxed max-w-xl">
                 Experience profound relaxation and systemic realignment through Usui Shiki Ryoho Reiki. Dissolve deep emotional stress, reset your central nervous system, and clear auric layers.

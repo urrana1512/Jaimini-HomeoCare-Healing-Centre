@@ -146,15 +146,25 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3.5 text-xs text-medium-gray">
               <li className="flex items-start space-x-2.5">
-                <MapPin size={16} className="text-sage-green mt-0.5 shrink-0" />
-                <a 
-                  href="https://maps.app.goo.gl/XqBzotc1ssKFNdrEA"
+                <a
+                  href="https://www.google.com/maps/place/Jaimini+Homeocare+%26+Healing+Centre/@23.008198,72.617178,200m/data=!3m1!1e3!4m6!3m5!1s0x395e870ba3a6310f:0x1c562d98662c5ec5!8m2!3d23.0082689!4d72.617337!16s%2Fg%2F11njnjh0wj?hl=en&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-warm-gold transition-colors"
+                  className="text-sage-green mt-0.5 shrink-0 hover:text-warm-gold transition-colors"
+                  aria-label="View on Google Maps"
                 >
-                  C-108 Saujanya Apartment, Nr. Anupam Cinema, Khokhra road, Ahmedabad - 380021
+                  <MapPin size={16} />
                 </a>
+                <div className="space-y-1">
+                  <a 
+                    href="https://www.google.com/maps/place/Jaimini+Homeocare+%26+Healing+Centre/@23.008198,72.617178,200m/data=!3m1!1e3!4m6!3m5!1s0x395e870ba3a6310f:0x1c562d98662c5ec5!8m2!3d23.0082689!4d72.617337!16s%2Fg%2F11njnjh0wj?hl=en&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-warm-gold transition-colors block leading-relaxed"
+                  >
+                    C-108 Saujanya Apartment, Nr. Anupam Cinema, Khokhra road, Ahmedabad - 380021
+                  </a>
+                </div>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Phone size={16} className="text-sage-green shrink-0" />
@@ -188,10 +198,22 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-medium-gray space-y-4 sm:space-y-0">
           <p>&copy; {currentYear} Jaimini Homeocare & Healing Centre. All rights reserved.</p>
-          <div className="flex space-x-6">
+          <div className="flex space-x-4 items-center">
+            <button
+              onClick={() => {
+                sessionStorage.removeItem("jaimini_intro_played");
+                window.dispatchEvent(new CustomEvent("replay-jaimini-intro"));
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="hover:text-warm-gold transition-colors cursor-pointer focus:outline-none text-xs"
+            >
+              Replay Intro
+            </button>
+            <span className="text-light-gray/20 text-[10px]">|</span>
             <Link href="/contact" className="hover:text-warm-gold transition-colors">
               Privacy Policy
             </Link>
+            <span className="text-light-gray/20 text-[10px]">|</span>
             <Link href="/contact" className="hover:text-warm-gold transition-colors">
               Terms & Conditions
             </Link>

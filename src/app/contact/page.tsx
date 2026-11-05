@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { MessageSquare, Phone, Mail, MapPin, Calendar, Clock, Send, CheckCircle, Star, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -51,23 +52,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 text-left">
-      <div className="text-center space-y-4 mb-16">
-        <ScrollReveal direction="down">
-          <span className="text-xs font-semibold tracking-widest text-forest-green uppercase block">Connect With Us</span>
-        </ScrollReveal>
-        <ScrollReveal direction="up" delay={0.1}>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal">
-            Book Your Healing Consultation
-          </h1>
-          <div className="gold-divider w-24 mx-auto mt-4" />
-          <p className="text-xs md:text-sm text-medium-gray max-w-xl mx-auto mt-4">
-            Have questions or ready to schedule your intake? Complete the booking form below or reach out via WhatsApp for immediate priority scheduling.
-          </p>
-        </ScrollReveal>
-      </div>
+    <div className="pb-20 text-left">
+      <PageHeader 
+        title="Contact Us" 
+        subtitle="Have questions or ready to schedule your intake? Complete the booking form or reach out via WhatsApp." 
+      />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* CONTACT DATA */}
         <div className="lg:col-span-5 space-y-8">
           <ScrollReveal direction="right" className="bg-white border border-light-gray/40 rounded-3xl p-8 shadow-premium-soft space-y-6">
@@ -75,14 +67,37 @@ export default function ContactPage() {
             
             <div className="space-y-5">
               <div className="flex items-start space-x-4 text-xs">
-                <div className="w-10 h-10 rounded-full bg-forest-green/10 flex items-center justify-center text-forest-green shrink-0">
+                <a
+                  href="https://www.google.com/maps/place/Jaimini+Homeocare+%26+Healing+Centre/@23.008198,72.617178,200m/data=!3m1!1e3!4m6!3m5!1s0x395e870ba3a6310f:0x1c562d98662c5ec5!8m2!3d23.0082689!4d72.617337!16s%2Fg%2F11njnjh0wj?hl=en&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-forest-green/10 flex items-center justify-center text-forest-green shrink-0 hover:bg-forest-green hover:text-white transition-colors cursor-pointer"
+                  aria-label="View on Google Maps"
+                >
                   <MapPin size={18} />
-                </div>
+                </a>
                 <div>
-                  <h4 className="font-bold text-deep-charcoal">Clinic Location</h4>
-                  <p className="text-medium-gray leading-relaxed mt-1">
+                  <div className="flex items-center space-x-2">
+                    <h4 className="font-bold text-deep-charcoal">Clinic Location</h4>
+                    
+                  </div>
+                  <a
+                    href="https://www.google.com/maps/place/Jaimini+Homeocare+%26+Healing+Centre/@23.008198,72.617178,200m/data=!3m1!1e3!4m6!3m5!1s0x395e870ba3a6310f:0x1c562d98662c5ec5!8m2!3d23.0082689!4d72.617337!16s%2Fg%2F11njnjh0wj?hl=en&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-medium-gray leading-relaxed mt-1 hover:text-forest-green transition-colors block"
+                  >
                     C-108 Saujanya Apartment, Nr. Anupam Cinema, Khokhra road, Ahmedabad - 380021
-                  </p>
+                  </a>
+                  <a
+                    href="https://www.google.com/maps/place/Jaimini+Homeocare+%26+Healing+Centre/@23.008198,72.617178,200m/data=!3m1!1e3!4m6!3m5!1s0x395e870ba3a6310f:0x1c562d98662c5ec5!8m2!3d23.0082689!4d72.617337!16s%2Fg%2F11njnjh0wj?hl=en&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1 text-[11px] font-bold text-forest-green hover:underline mt-1.5"
+                  >
+                    <span>Get Directions on Google Maps</span>
+                    <ExternalLink size={11} />
+                  </a>
                 </div>
               </div>
 
@@ -241,7 +256,7 @@ export default function ContactPage() {
                       <option>Reiki Healing</option>
                       <option>Lama Fera Healing</option>
                       <option>Tarot Card Reading</option>
-                      <option>Crystal Bracelets</option>
+                      <option>Crystal Products</option>
                       <option>General Intake/Unsure</option>
                     </select>
                   </div>
@@ -308,33 +323,45 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* MOCK MAP DISPLAY */}
+      {/* GOOGLE MAP SATELLITE VIEW */}
       <section className="mt-20">
-        <ScrollReveal direction="up" className="bg-white border border-light-gray/40 rounded-3xl p-6 shadow-premium-soft overflow-hidden space-y-4">
-          <h3 className="font-heading text-xl font-bold text-deep-charcoal">Our Healing Sanctuary</h3>
-          
-          <div className="relative w-full h-[350px] bg-sage-green/10 rounded-2xl overflow-hidden flex items-center justify-center border border-light-gray/35">
-            {/* Visual representation of a beautiful abstract map */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#0b6b4f_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
-            <div className="relative text-center p-6 space-y-4 max-w-sm">
-              <div className="w-12 h-12 rounded-full bg-forest-green/10 text-forest-green flex items-center justify-center mx-auto shadow-premium-glow-green animate-bounce">
-                <MapPin size={24} />
+        <ScrollReveal direction="up" className="bg-white border border-light-gray/40 rounded-3xl p-6 md:p-8 shadow-premium-soft overflow-hidden space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-light-gray/30 pb-4">
+            <div className="space-y-1">
+              <div className="flex items-center space-x-2">
+                <span className="text-[10px] font-bold tracking-widest text-forest-green uppercase block">Visit Our Centre</span>
+                
               </div>
-              <div className="space-y-1">
-                <h4 className="font-heading text-sm font-bold text-deep-charcoal">Jaimini Homeocare & Healing</h4>
-                <p className="text-[11px] text-medium-gray">
-                  C-108 Saujanya Apartment, Nr. Anupam Cinema, Khokhra road, Ahmedabad - 380021
-                </p>
-              </div>
-              <a 
-                href="https://maps.app.goo.gl/XqBzotc1ssKFNdrEA" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center space-x-1 bg-white text-forest-green border border-forest-green/30 text-[10px] font-bold px-4 py-2 rounded-full hover:bg-sage-green/10 transition-colors"
-              >
-                <span>Open in Google Maps</span>
-              </a>
+              <h3 className="font-heading text-xl md:text-2xl font-bold text-deep-charcoal">Jaimini Homeocare &amp; Healing Centre</h3>
+              <p className="text-xs text-medium-gray flex items-center space-x-1.5 mt-0.5">
+                <MapPin size={13} className="text-forest-green shrink-0" />
+                <span>C-108 Saujanya Apartment, Nr. Anupam Cinema, Khokhra road, Ahmedabad - 380021</span>
+              </p>
             </div>
+            <a 
+              href="https://www.google.com/maps/place/Jaimini+Homeocare+%26+Healing+Centre/@23.008198,72.617178,200m/data=!3m1!1e3!4m6!3m5!1s0x395e870ba3a6310f:0x1c562d98662c5ec5!8m2!3d23.0082689!4d72.617337!16s%2Fg%2F11njnjh0wj?hl=en&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center space-x-2 bg-forest-green text-cream-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-forest-green/95 transition-all shadow-premium-soft shrink-0 self-start sm:self-auto cursor-pointer"
+            >
+              <MapPin size={14} />
+              <span>Open in Google Maps</span>
+              <ExternalLink size={12} />
+            </a>
+          </div>
+
+          <div className="relative w-full h-[450px] md:h-[500px] rounded-2xl overflow-hidden border border-light-gray/40 shadow-inner bg-off-white">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d815.3278207719837!2d72.61730807732565!3d23.008379246259683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e870ba3a6310f%3A0x1c562d98662c5ec5!2sJaimini%20Homeocare%20%26%20Healing%20Centre!5e1!3m2!1sen!2sin!4v1793889722880!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="Jaimini Homeocare & Healing Centre Satellite Map View"
+              className="w-full h-full"
+            />
           </div>
         </ScrollReveal>
       </section>
@@ -369,6 +396,7 @@ export default function ContactPage() {
           </div>
         </ScrollReveal>
       </section>
+      </div>
     </div>
   );
 }

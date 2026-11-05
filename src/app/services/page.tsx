@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles, Heart, Activity, Compass, Shield, CheckCircle, ArrowRight, MessageSquare, Laptop, Home, UserCheck } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 const servicesOverviewList = [
   {
@@ -41,15 +42,15 @@ const servicesOverviewList = [
     icon: Compass,
     color: "text-purple-950 bg-purple-900/10 border-purple-950/20",
     href: "/services/tarot-reading",
-    image: "/images/services/crystal_bracelets.png", // fallback
+    image: "/images/services/tarot_reading.png",
     benefits: ["Resolves career cross-roads", "Spiritual self-discovery", "Unbiased life advice"]
   },
   {
-    name: "Crystal Bracelets",
+    name: "Crystal Products",
     desc: "Handcrafted auric shields using natural programmatic gemstones activated with Reiki parameters.",
     icon: Sparkles,
     color: "text-celestial-blue bg-celestial-blue/10 border-celestial-blue/20",
-    href: "/services/crystal-bracelets",
+    href: "/services/crystal-products",
     image: "/images/services/crystal_bracelets.png",
     benefits: ["24/7 energetic support", "Amethyst, Jade & Citrine options", "Activated to your birth chart"]
   },
@@ -84,24 +85,11 @@ const servicesOverviewList = [
 
 export default function ServicesPage() {
   return (
-    <div className="space-y-20 pb-20 pt-10 text-left">
-      {/* SERVICES HERO */}
-      <section className="relative bg-gradient-to-b from-cream-white to-sage-green/10 py-16 border-b border-light-gray/20">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-4">
-          <ScrollReveal direction="down">
-            <span className="text-xs font-semibold tracking-widest text-forest-green uppercase block">Healing Modalities</span>
-          </ScrollReveal>
-          <ScrollReveal direction="up" delay={0.1}>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
-              Complete Integrated Wellness Solutions
-            </h1>
-            <div className="gold-divider w-24 mx-auto mt-4" />
-            <p className="text-xs md:text-sm text-medium-gray leading-relaxed max-w-xl mx-auto mt-4">
-              We align physical medicine, biofield frequencies, and intuitive insights to build a strong foundation for your long-term vitality.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+    <div className="pb-20 space-y-20 text-left">
+      <PageHeader 
+        title="Our Services" 
+        subtitle="We align physical medicine, biofield frequencies, and intuitive insights to build a strong foundation for your long-term vitality." 
+      />
 
       {/* SERVICES GRID */}
       <section className="max-w-7xl mx-auto px-6 lg:px-8">

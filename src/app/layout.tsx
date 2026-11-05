@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
+import CartDrawer from "@/components/ecommerce/CartDrawer";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Jaimini Homeocare & Healing Centre | Dr. Niyati Rana",
-  description: "Premium holistic wellness by Dr. Niyati Rana. Experience complete mind-body-spirit transformation through Homeopathy, Reiki Healing, Lama Fera, Tarot, and Crystal Bracelets.",
+  description: "Premium holistic wellness by Dr. Niyati Rana. Experience complete mind-body-spirit transformation through Homeopathy, Reiki Healing, Lama Fera, Tarot, and Crystal Products.",
   icons: {
     icon: "/images/jaimini_logo.png",
     apple: "/images/jaimini_logo.png",
@@ -28,11 +31,16 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-cream-white text-deep-charcoal relative">
-        <Navbar />
-        <main className="flex-grow pt-20">
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <WishlistProvider>
+            <Navbar />
+            <main className="flex-grow pt-20">
+              {children}
+            </main>
+            <Footer />
+            <CartDrawer />
+          </WishlistProvider>
+        </CartProvider>
 
         {/* Floating WhatsApp Button */}
         <a

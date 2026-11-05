@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 const homeopathyPrinciples = [
   { title: "Similia Similibus Curentur", desc: "The foundational law of 'like cures like.' A substance that causes symptoms in a healthy person can cure similar symptoms in a sick person when given in micro-doses." },
@@ -145,18 +146,28 @@ export default function HomeopathyPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="space-y-20 pb-20 pt-10 text-left">
+    <div className="pb-20 space-y-20 text-left">
+      <PageHeader 
+        title="Homeopathy Consultation" 
+        subtitle="Classical, individual-centered medicine designed to trigger the body's innate defense mechanisms." 
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: "Homeopathy" },
+        ]}
+      />
+
       {/* A. HERO */}
-      <section className="relative bg-gradient-to-r from-cream-white via-cream-white to-sage-green/20 py-20 border-b border-light-gray/20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="down">
               <span className="text-xs font-semibold tracking-widest text-forest-green uppercase block">Medical Homeopathy</span>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.1}>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
-                Homeopathy: Healing from the Constitutional Root
-              </h1>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
+                Healing from the Constitutional Root
+              </h2>
               <div className="gold-divider w-24 my-4" />
               <p className="text-xs md:text-sm text-medium-gray leading-relaxed max-w-xl">
                 Classical, individual-centered medicine designed to trigger the body&apos;s innate defense mechanisms. Realize sustainable recovery from metabolic, skin, digestive, and hormonal disorders.

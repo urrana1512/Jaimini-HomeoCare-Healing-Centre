@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Compass, Sparkles, BookOpen, Clock, ChevronDown, Check, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 
 const spreadsList = [
   {
@@ -61,7 +62,7 @@ const pricingPackages = [
       "90 minutes detailed live video call",
       "12-Card Year ahead spread",
       "PDF Summary of monthly focus areas",
-      "Includes 1 custom activated crystal bracelet suggestions"
+      "Includes 1 custom activated crystal product suggestions"
     ]
   }
 ];
@@ -85,18 +86,28 @@ export default function TarotPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="space-y-20 pb-20 pt-10 text-left">
+    <div className="pb-20 space-y-20 text-left">
+      <PageHeader 
+        title="Tarot Card Reading" 
+        subtitle="Gain clarity on life transitions, relationship dynamics, and career cross-roads." 
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: "Tarot Reading" },
+        ]}
+      />
+
       {/* HERO */}
-      <section className="relative bg-gradient-to-r from-cream-white via-cream-white to-indigo-500/10 py-20 border-b border-light-gray/20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="down">
               <span className="text-xs font-semibold tracking-widest text-indigo-950 uppercase block">Intuitive Counsel</span>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.1}>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal leading-tight">
                 Tarot Card Reading & Spiritual Guidance
-              </h1>
+              </h2>
               <div className="gold-divider w-24 my-4" />
               <p className="text-xs md:text-sm text-medium-gray leading-relaxed max-w-xl">
                 Gain clarity on life transitions, relationship dynamics, and career cross-roads. Dr. Niyati Rana combines psychological archetype cards with intuitive channel mapping.
@@ -117,8 +128,8 @@ export default function TarotPage() {
           <div className="lg:col-span-5 flex justify-center">
             <ScrollReveal direction="left" delay={0.3} className="relative w-full max-w-[380px] aspect-[4/3] rounded-3xl overflow-hidden border border-light-gray shadow-premium-medium bg-off-white">
               <Image
-                src="/images/services/crystal_bracelets.png"
-                alt="Gemstones and spiritual layout"
+                src="/images/services/tarot_reading.png"
+                alt="Tarot card reading session"
                 fill
                 className="object-cover"
               />

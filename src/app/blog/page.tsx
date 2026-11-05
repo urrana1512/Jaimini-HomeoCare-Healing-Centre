@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Search, Calendar, Clock, BookOpen, User, X, ArrowRight, MessageSquare, ChevronRight, Share2, Heart, Check } from "lucide-react";
 import { FaPlay, FaWhatsapp, FaPhoneAlt, FaInstagram } from "react-icons/fa";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import PageHeader from "@/components/layout/PageHeader";
 import CounterAnimation from "@/components/animations/CounterAnimation";
 
 const blogCategories = ["All", "Homeopathy", "Energy Healing", "Tarot", "Crystals"];
@@ -104,7 +105,7 @@ const blogPosts = [
     date: "May 15, 2026",
     readTime: "3 min read",
     author: "Dr. Niyati Rana",
-    thumbnail: "/images/services/crystal_bracelets.png",
+    thumbnail: "/images/services/tarot_reading.png",
     snippet: "Tarot is a map of subconscious coordinates, not a set of rigid predictions. Learn how open-ended questions unlock deep clarity for career and relationship paths.",
     likes: 156,
     content: (
@@ -324,30 +325,15 @@ export default function BlogPage() {
   const featuredStory = successStories.find((s) => s.featured);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 text-left relative bg-cream-white text-deep-charcoal">
-      
-      {/* HEADER */}
-      <div className="text-center space-y-4 mb-8">
-        <ScrollReveal direction="down">
-          <span className="text-xs font-semibold tracking-widest text-forest-green uppercase block">
-            {activeSection === "stories" ? "Patient Case Studies" : "Holistic Insights"}
-          </span>
-        </ScrollReveal>
-        <ScrollReveal direction="up" delay={0.1}>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-deep-charcoal">
-            {activeSection === "stories" 
-              ? "Patient Success Stories" 
-              : "Healing Blog & Wellness Articles"}
-          </h1>
-          <div className="gold-divider w-24 mx-auto mt-4" />
-          <p className="text-xs md:text-sm text-medium-gray max-w-xl mx-auto mt-4">
-            {activeSection === "stories"
-              ? "Read detailed case studies showing holistic recovery journeys, constitutional homeopathic balance, and natural biofield restoration."
-              : "Explore insights on constitutional homeopathy, Reiki autonomic biofield resets, Tibetan Lama Fera energy grids, and intuitive wisdom guides."}
-          </p>
-        </ScrollReveal>
-      </div>
+    <div className="pb-16 text-left relative bg-cream-white text-deep-charcoal">
+      <PageHeader 
+        title={activeSection === "stories" ? "Success Stories" : "Healing Blog"}
+        subtitle={activeSection === "stories"
+          ? "Read detailed case studies showing holistic recovery journeys, constitutional homeopathic balance, and natural biofield restoration."
+          : "Explore insights on constitutional homeopathy, Reiki autonomic biofield resets, Tibetan Lama Fera energy grids, and intuitive wisdom guides."}
+      />
 
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 relative">
       {/* DASHBOARD SWITCHER TOGGLE */}
       <div className="flex justify-center mb-12">
         <ScrollReveal direction="up" delay={0.2} className="inline-flex bg-white border border-light-gray/45 rounded-full p-1.5 shadow-premium-soft items-center space-x-1">
@@ -1067,7 +1053,7 @@ export default function BlogPage() {
           </div>
         </div>
       )}
-
+      </div>
     </div>
   );
 }

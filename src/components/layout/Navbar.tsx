@@ -5,32 +5,36 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, MessageSquare, ChevronDown } from "lucide-react";
-
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services", hasDropdown: true },
-  { name: "Gallery", href: "/gallery" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-];
+import { Menu, X, ArrowRight, MessageSquare, ChevronDown, ShoppingBag, Heart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 const serviceDropdownItems = [
   { name: "Homeopathy Consultation", href: "/services/homeopathy" },
   { name: "Reiki Healing", href: "/services/reiki-healing" },
   { name: "Lama Fera Healing", href: "/services/lama-fera" },
   { name: "Tarot Card Reading", href: "/services/tarot-reading" },
-  { name: "Crystal Bracelets", href: "/services/crystal-bracelets" },
+  { name: "Crystal Products", href: "/services/crystal-products" },
+];
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services", hasDropdown: true, dropdownItems: serviceDropdownItems },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { openCart, cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +64,7 @@ export default function Navbar() {
   // Close mobile menu when pathname changes
   useEffect(() => {
     setIsOpen(false);
-    setDropdownOpen(false);
+    setActiveDropdown(null);
   }, [pathname]);
 
   return (
@@ -110,8 +114,8 @@ export default function Navbar() {
                   <div
                     key={link.name}
                     className="relative"
-                    onMouseEnter={() => setDropdownOpen(true)}
-                    onMouseLeave={() => setDropdownOpen(false)}
+                    onMouseEnter={() => setActiveDropdown(link.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <button
                       className={`flex items-center space-x-1 font-medium text-sm transition-colors duration-300 ${
@@ -119,11 +123,11 @@ export default function Navbar() {
                       }`}
                     >
                       <span>{link.name}</span>
-                      <ChevronDown size={14} className={`transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === link.name ? "rotate-180" : ""}`} />
                     </button>
 
                     <AnimatePresence>
-                      {dropdownOpen && (
+                      {activeDropdown === link.name && (
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -131,7 +135,7 @@ export default function Navbar() {
                           transition={{ duration: 0.2 }}
                           className="absolute left-0 mt-2 w-64 rounded-xl bg-cream-white shadow-premium-medium border border-light-gray/30 p-2 z-50"
                         >
-                          {serviceDropdownItems.map((item) => (
+                          {link.dropdownItems?.map((item) => (
                             <Link
                               key={item.name}
                               href={item.href}
@@ -168,27 +172,71 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop WhatsApp CTA */}
-          <div className="hidden lg:flex items-center space-x-4">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-3">
+            {/* Wishlist Link */}
+            <Link
+              href="/wishlist"
+              className="relative p-2 rounded-full hover:bg-sage-green/15 text-deep-charcoal hover:text-forest-green transition-all"
+              title="Wishlist"
+            >
+              <Heart size={19} />
+              {wishlistCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Cart Button */}
+            <button
+              onClick={openCart}
+              className="relative p-2 rounded-full hover:bg-sage-green/15 text-deep-charcoal hover:text-forest-green transition-all cursor-pointer"
+              title="View Cart"
+            >
+              <ShoppingBag size={19} />
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-forest-green text-cream-white text-[9px] font-bold flex items-center justify-center animate-pulse">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+
+            {/* Desktop WhatsApp CTA */}
             <a
               href="https://wa.me/919316356317?text=Hi%20Dr.%20Niyati,%20I%20would%20like%20to%20book%20a%20consultation."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-forest-green text-cream-white text-xs font-medium px-5 py-2.5 rounded-full hover:bg-forest-green/95 shadow-premium-soft hover:shadow-premium-medium transition-all duration-300 hover:-translate-y-0.5 border border-transparent hover:border-warm-gold group"
+              className="inline-flex items-center space-x-2 bg-forest-green text-cream-white text-xs font-medium px-5 py-2.5 rounded-full hover:bg-forest-green/95 shadow-premium-soft hover:shadow-premium-medium transition-all duration-300 hover:-translate-y-0.5 border border-transparent hover:border-warm-gold group ml-1"
             >
               <MessageSquare size={14} className="text-sage-green group-hover:scale-110 transition-transform" />
               <span>Book via WhatsApp</span>
             </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-deep-charcoal hover:text-forest-green p-1 transition-colors"
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Right Controls */}
+          <div className="flex items-center space-x-2 lg:hidden">
+            <button
+              onClick={openCart}
+              className="relative p-2 text-deep-charcoal hover:text-forest-green"
+              aria-label="Open Cart"
+            >
+              <ShoppingBag size={20} />
+              {cartCount > 0 && (
+                <span className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-forest-green text-cream-white text-[9px] font-bold flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-deep-charcoal hover:text-forest-green p-1 transition-colors"
+              aria-label="Toggle Menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -240,7 +288,7 @@ export default function Navbar() {
                         {link.name}
                       </span>
                       <div className="pl-4 border-l border-sage-green space-y-4">
-                        {serviceDropdownItems.map((item) => (
+                        {link.dropdownItems?.map((item) => (
                           <Link
                             key={item.name}
                             href={item.href}
